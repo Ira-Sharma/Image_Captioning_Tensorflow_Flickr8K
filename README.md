@@ -27,7 +27,7 @@ Flick8K dataset is a new benchmark collection for sentence-based image descripti
 Convolutional Neural Network (CNN) method is used for image feature extraction. VGG16 model is a series of convolutional layers followed by a few dense (or fully connected) layers. The input layer to the last max pooling layer (labeled by 7 x 7 x 512) is regarded as feature extraction part of the model, while the rest of the network is regarded as classification part of the model. After loading VGG16 and restructuring by excluding the classification part of the model , we load the input image with the size expected by the model, in this case, 224Ö224, then we convert the image pixels to numpy array whose dimensions are reshaped for the model. After preprocessing the images for VGG16, general features are extracted which are then used further for the image classifiers.
 <h2 id="Caption Data Analysis">Caption Data Analysis</h2>
 After loading the caption data, some analysis is done on the captions including the visualisation of the frequency distribution of the words- most common 50 words and least common 50 words.
-<p align = "center"><img align = "center" src = "images/model_train.png" /></p>
+<p align = "center"><img align = "center" src = "Images/ana.png" /></p>
 <h2 id="Prepare Captions">Prepare Captions</h2>
 Each caption consists of an English sentence. To prepare this for training, we perform the following steps on each sentence:
 1. Clean it by converting all words to lower case and removing punctuation, words with numbers and short words with a single character.
@@ -43,7 +43,7 @@ a vocabulary of all the words that occur in the set of captions.
 <h3 id="Decoder">Decoder</h3>
   The decoder generates image captions word by word using a Recurrent Neural Network - LSTMs which is able to sequentially generate words. The input for the decoder is the encoded image feature vectors from CNN and the encoded image captions produced in data preprocessing stage.
 It gets combined input from Input1 and Input2, consists of a Dense layer with Relu activation function and the output as Dense layer with Softmax activation function.
-  <p align = "center"><img align = "center" src = "images/model_train.png" /></p>
+  <p align = "center"><img align = "center" src = "Images/model.png" /></p>
 <h2 id="Loss Function">Loss Function</h2>
 The nature of our RNN output is a series likelihood of words’ occurences, and in order to quantify the quality of the RNN output, we propose to use Cross Entropy Loss. This is the most popular and effective measurement for the performance of a classification model whose output is a probability value between 0 and 1. The categorical cross-entropy is applied in multiclass classification scenarios. in the formula, we multiply the actual outcome with the logarithm of the outcome produced by the model for over more than two classes and then sum up.
 The categorical cross-entropy is appropriate in combination with an activation function such as
@@ -52,7 +52,7 @@ softmax that can produce several probabilities for the number of classes that su
 <h2 id="Training the model">Training the model</h2>
   
 A Data Generator function is defined to get data in batch instead taking it altogether to avoid session crash. The entire data is split into train and test and the model training is done on the train data. The loss decreases gradually over the iterations, number of epochs and batch size are assigned accordingly for better results.
-  <p align = "center"><img align = "center" src = "images/model_train.png" /></p>
+  <p align = "center"><img align = "center" src = "Images/loss.png" /></p>
 <h2 id="Generating the captions">Generating the captions</h2>
   Captions are generated for the image by converting the predicted index from the model into a word. All the words for the image are generated, the caption starts with ’startseq’ and the model continues to predict the caption until the ’endseq’ appeared.
 <h2 id="BLEU Score">BLEU Score</h2>
@@ -60,16 +60,15 @@ A Data Generator function is defined to get data in batch instead taking it alto
 BLEU (Bilingual Evaluation Understudy) is a well-acknowledged metric to measure the similarity of one hypothesis sentence to multiple reference sentences. Given a single hypothesis sentence and multiple reference sentences, it returns value between 0 and 1. The metric close to 1 means that the two are very similar. The Python Natural Language Toolkit library, or NLTK, provides an implementation of the BLEU score that you can use to evaluate your generated text against a reference.
 <h2 id="Testing the model">Testing the model</h2>
   Model is tested over the test data, BLEU Score is evaluated to study the performance of the model with the predicted caption against the actual captions, in a list of tokens.
-<p align = "center"><img align = "center" src = "images/model_train.png" /></p>
+<p align = "center"><img align = "center" src = "Images/bleu.png" /></p>
 <h2 id="Results">Results</h2>
   Finally, the results are visualised for 6 test images containing the actual captions, a predicted caption, the BLEU score and a comment whether the predicted caption is Bad, Not Bad and Good depending on the BLEU score against the actual captions for that particular image.
-<p align = "center"><img align = "center" src = "images/model_train.png" /></p>
-<p align = "center"><img align = "center" src = "images/model_train.png" /></p>
-<p align = "center"><img align = "center" src = "images/model_train.png" /></p>
-<p align = "center"><img align = "center" src = "images/model_train.png" /></p>
-<p align = "center"><img align = "center" src = "images/model_train.png" /></p>
-<p align = "center"><img align = "center" src = "images/model_train.png" /></p>
-<p align = "center"><img align = "center" src = "images/model_train.png" /></p>
+<p align = "center"><img align = "center" src = "Images/dog.png" /></p>
+<p align = "center"><img align = "center" src = "Images/bike.png" /></p>
+<p align = "center"><img align = "center" src = "Images/water.png" /></p>
+<p align = "center"><img align = "center" src = "Images/guy.png" /></p>
+<p align = "center"><img align = "center" src = "Images/horse.png" /></p>
+<p align = "center"><img align = "center" src = "Images/car.png" /></p>
  
 <h2 id="Future Work">Future Work</h2>
   A smaller dataset (Flickr8k) was used due to limited computational power. Potential improvement can be done by training on a combination of Flickr8k, Flickr30k, and MSCOCO. Pre-trained CNN network was directly used as part of our pipeline without fine-tuning, so the network does not adapt to this specific training dataset. Thus, by experimenting with different CNN pre-trained networks and enabling fine-tuning, we can expect to achieve a slightly higher BLEU- 4 score.

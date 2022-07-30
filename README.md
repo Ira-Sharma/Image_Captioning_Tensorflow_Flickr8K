@@ -52,7 +52,7 @@ softmax that can produce several probabilities for the number of classes that su
 <h2 id="Training the model">Training the model</h2>
   
 A Data Generator function is defined to get data in batch instead taking it altogether to avoid session crash. The entire data is split into train and test and the model training is done on the train data. The loss decreases gradually over the iterations, number of epochs and batch size are assigned accordingly for better results.
-  <p align = "center"><img align = "center" src = "Images/loss.png" width="500" height="400" /></p>
+  <p align = "center"><img align = "center" src = "Images/loss.png" width="500" height="300" /></p>
 <h2 id="Generating the captions">Generating the captions</h2>
   Captions are generated for the image by converting the predicted index from the model into a word. All the words for the image are generated, the caption starts with ’startseq’ and the model continues to predict the caption until the ’endseq’ appeared.
 <h2 id="BLEU Score">BLEU Score</h2>

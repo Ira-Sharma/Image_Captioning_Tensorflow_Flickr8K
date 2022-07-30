@@ -52,7 +52,7 @@ softmax that can produce several probabilities for the number of classes that su
 <h2 id="Training the model">Training the model</h2>
   
 A Data Generator function is defined to get data in batch instead taking it altogether to avoid session crash. The entire data is split into train and test and the model training is done on the train data. The loss decreases gradually over the iterations, number of epochs and batch size are assigned accordingly for better results.
-  <p align = "center"><img align = "center" src = "Images/loss.png" /></p>
+  <p align = "center"><img align = "center" src = "Images/loss.png" width="500" height="400" /></p>
 <h2 id="Generating the captions">Generating the captions</h2>
   Captions are generated for the image by converting the predicted index from the model into a word. All the words for the image are generated, the caption starts with ’startseq’ and the model continues to predict the caption until the ’endseq’ appeared.
 <h2 id="BLEU Score">BLEU Score</h2>
@@ -60,15 +60,15 @@ A Data Generator function is defined to get data in batch instead taking it alto
 BLEU (Bilingual Evaluation Understudy) is a well-acknowledged metric to measure the similarity of one hypothesis sentence to multiple reference sentences. Given a single hypothesis sentence and multiple reference sentences, it returns value between 0 and 1. The metric close to 1 means that the two are very similar. The Python Natural Language Toolkit library, or NLTK, provides an implementation of the BLEU score that you can use to evaluate your generated text against a reference.
 <h2 id="Testing the model">Testing the model</h2>
   Model is tested over the test data, BLEU Score is evaluated to study the performance of the model with the predicted caption against the actual captions, in a list of tokens.
-<p align = "center"><img align = "center" src = "Images/bleu.png" /></p>
+<p align = "center"><img align = "center" src = "Images/bleu.png" width="500" height="300"/></p>
 <h2 id="Results">Results</h2>
   Finally, the results are visualised for 6 test images containing the actual captions, a predicted caption, the BLEU score and a comment whether the predicted caption is Bad, Not Bad and Good depending on the BLEU score against the actual captions for that particular image.
-<p align = "center"><img align = "center" src = "Images/dog.png" /></p>
-<p align = "center"><img align = "center" src = "Images/bike.png" /></p>
-<p align = "center"><img align = "center" src = "Images/water.png" /></p>
-<p align = "center"><img align = "center" src = "Images/guy.png" /></p>
-<p align = "center"><img align = "center" src = "Images/horse.png" /></p>
-<p align = "center"><img align = "center" src = "Images/car.png" /></p>
+<p align = "center"><img align = "center" src = "Images/dog.png" width="500" height="300"/></p>
+<p align = "center"><img align = "center" src = "Images/bike.png" width="500" height="300"/></p>
+<p align = "center"><img align = "center" src = "Images/water.png" width="500" height="300"/></p>
+<p align = "center"><img align = "center" src = "Images/guy.png" width="500" height="300" /></p>
+<p align = "center"><img align = "center" src = "Images/horse.png" width="500" height="300"/></p>
+<p align = "center"><img align = "center" src = "Images/car.png" width="500" height="300" /></p>
  
 <h2 id="Future Work">Future Work</h2>
   A smaller dataset (Flickr8k) was used due to limited computational power. Potential improvement can be done by training on a combination of Flickr8k, Flickr30k, and MSCOCO. Pre-trained CNN network was directly used as part of our pipeline without fine-tuning, so the network does not adapt to this specific training dataset. Thus, by experimenting with different CNN pre-trained networks and enabling fine-tuning, we can expect to achieve a slightly higher BLEU- 4 score.
